@@ -1,9 +1,8 @@
+"use client";
+
 import Header from "@/components/Header";
-import { dbConnection } from "@/db/mongoConnection";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import AuthProvider from "./providers/AuthProvider";
-import ToastProvider from "./providers/ToastProvider";
 
 const poppin = Poppins({
 	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -13,21 +12,19 @@ const poppin = Poppins({
 });
 
 export const metadata = {
-	title: "Khana Khazana",
+	title: "Error - Khana Khazana",
 	description: "Developed by LWS",
 };
 
-export default async function RootLayout({ children }) {
-	await dbConnection();
+export default function GlobalError({ error, reset }) {
 	return (
 		<html lang="en">
 			<body className={poppin.className}>
-				<ToastProvider>
-					<AuthProvider>
-						<Header />
-						<main>{children}</main>
-					</AuthProvider>
-				</ToastProvider>
+				<Header />
+				<main>
+					<h2>Something went wrong!</h2>
+					<button onClick={() => reset()}>Try again</button>
+				</main>
 			</body>
 		</html>
 	);
