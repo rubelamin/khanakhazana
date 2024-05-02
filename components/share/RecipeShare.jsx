@@ -8,11 +8,11 @@ import {
 export default function RecipeShare({ recipeUrl, recipeName }) {
 	return (
 		<>
-			<FacebookShareButton url={`/${recipeUrl}`} quote={recipeName}>
+			<FacebookShareButton url={recipeUrl} quote={recipeName}>
 				<FacebookIcon size={32} round />
 			</FacebookShareButton>
 
-			<TwitterShareButton url={`/${recipeUrl}`} title={recipeName}>
+			<TwitterShareButton url={recipeUrl} title={recipeName}>
 				<TwitterIcon size={32} round />
 			</TwitterShareButton>
 		</>

@@ -1,12 +1,17 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import RecipeShare from "../share/RecipeShare";
 
 export default function SocialShare({ title }) {
 	const pathname = usePathname();
+	const [currentUrl, setCurrentUrl] = useState(window.location.href);
 
-	// console.log(pathname);
+	useEffect(() => {
+		setCurrentUrl(window.location.href);
+	}, []);
+
 	return (
 		<div className="flex gap-2 text-gray-600 cursor-pointer hover:text-[#0E79F6]">
 			<svg
@@ -28,7 +33,7 @@ export default function SocialShare({ title }) {
 				<path d="M8.7 13.3l6.6 3.4" />
 			</svg>
 			<span>Share</span>
-			<RecipeShare recipeName={title} recipeUrl={`/${pathname}`} />
+			<RecipeShare recipeName={title} recipeUrl={currentUrl} />
 		</div>
 	);
 }
