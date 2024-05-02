@@ -8,13 +8,14 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 	return {
 		title: recipe?.name,
+		description: recipe?.description,
 		openGraph: {
 			images: [recipe?.thumbnail],
 		},
 	};
 }
 
-export default async function Details({ params: { recipeId } }) {
+export default async function Details({ params: { recipeId }, searchParams }) {
 	const recipe = await getRecipeById(recipeId);
 	return <RecipeDetails details={recipe} />;
 }

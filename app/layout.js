@@ -14,7 +14,7 @@ const poppin = Poppins({
 
 export const metadata = {
 	title: "Khana Khazana",
-	description: "Developed by LWS",
+	description: "Developed by Rubel Amin",
 };
 
 export default async function RootLayout({ children }) {
