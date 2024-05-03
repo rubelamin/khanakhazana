@@ -20,10 +20,7 @@ export default function Header() {
 						<Link href="/">Home</Link>
 					</li>
 					<li className="py-2">
-						<Link href="/">Recipe</Link>
-					</li>
-					<li className="py-2">
-						<Link href="/about">About us</Link>
+						<Link href="/recipe">Recipe</Link>
 					</li>
 					<li className="py-2 ">
 						<LogOut />

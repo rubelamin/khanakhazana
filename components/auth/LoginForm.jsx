@@ -3,11 +3,13 @@
 import { loginUser } from "@/app/actions";
 import { useAuth } from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import LoadingUI from "../common/LoadingUI";
 
 export default function LoginForm() {
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [beforeRedirect, setBeforeRedirect] = useState(false);
 
 	const { setAuth } = useAuth();
 
@@ -15,7 +17,9 @@ export default function LoginForm() {
 
 	async function onSubmit(event) {
 		event.preventDefault();
+
 		setLoading(true);
+		setBeforeRedirect(true);
 
 		try {
 			const formData = new FormData(event.currentTarget);
@@ -35,10 +39,23 @@ export default function LoginForm() {
 		}
 	}
 
+	useEffect(() => {
+		return () => setBeforeRedirect(false);
+	}, []);
+
 	return (
 		<>
+			{!loading && beforeRedirect && (
+				<div className="flex flex-col justify-center items-center py-6 px-3">
+					<LoadingUI />
+					<div>Authenticating....</div>
+				</div>
+			)}
 			{loading ? (
-				<div>Authenticating....</div>
+				<div className="flex flex-col justify-center items-center py-6 px-3">
+					<LoadingUI />
+					<div>Authenticating....</div>
+				</div>
 			) : (
 				<form className="login-form" onSubmit={onSubmit}>
 					<div className="justify-center items-center text-[13px] text-red-600">

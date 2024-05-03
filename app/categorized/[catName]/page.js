@@ -1,4 +1,6 @@
+import LoadingUI from "@/components/common/LoadingUI";
 import CategoryList from "@/components/recipes/CategoryList";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }, parent) {
 	const decodeCat = decodeURIComponent(params?.catName);
@@ -11,5 +13,9 @@ export async function generateMetadata({ params }, parent) {
 
 export default function CategoryPage({ params }) {
 	const decodeCat = decodeURIComponent(params?.catName);
-	return <CategoryList cat={decodeCat} />;
+	return (
+		<Suspense fallback={<LoadingUI />}>
+			<CategoryList cat={decodeCat} />
+		</Suspense>
+	);
 }

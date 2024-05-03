@@ -18,6 +18,8 @@ export async function registerUser(formData) {
 	const created = await createUser(newUser);
 
 	redirect("/login");
+
+	return created;
 }
 
 export async function loginUser(formData) {
