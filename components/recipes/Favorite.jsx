@@ -44,8 +44,6 @@ export default function Favorite({ recipeId }) {
 		}
 	}
 
-	console.log(res);
-
 	return (
 		<div
 			className={`flex gap-2 ${
