@@ -7,9 +7,11 @@ import {
 
 import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
+import dbConnection from "./mongoConnection";
 
 export async function getAllRecipes() {
 	try {
+		await dbConnection();
 		const recipes = await recipesModel.find().lean();
 
 		if (recipes.length) {
@@ -24,6 +26,7 @@ export async function getAllRecipes() {
 
 export async function getAllRecipesByCat(cat) {
 	try {
+		await dbConnection();
 		const recipes = await recipesModel.find().lean();
 
 		const filtered = recipes.filter(
@@ -42,6 +45,7 @@ export async function getAllRecipesByCat(cat) {
 
 export async function getRecipeById(id) {
 	try {
+		await dbConnection();
 		const recipe = await recipesModel.findById(id).lean();
 
 		if (recipe) {
@@ -55,6 +59,8 @@ export async function getRecipeById(id) {
 }
 
 export async function createUser(user) {
+	await dbConnection();
+
 	const isEmailExists = await userModel.findOne({ email: user?.email });
 
 	if (isEmailExists) {
@@ -64,6 +70,8 @@ export async function createUser(user) {
 }
 
 export async function authUser(user) {
+	await dbConnection();
+
 	const foundUser = await userModel.findOne({ email: user?.email }).lean();
 
 	if (!foundUser) {
@@ -83,6 +91,8 @@ export async function authUser(user) {
 }
 
 export async function favouriteToggle(userId, recipeId) {
+	await dbConnection();
+
 	const user = await userModel.findById(userId);
 
 	if (user) {

@@ -21,6 +21,7 @@ export default function RegistrationForm() {
 
 			if (res) {
 				setLoading(false);
+				setError(res.message);
 			}
 		} catch (error) {
 			setError(error.message);
@@ -40,6 +41,9 @@ export default function RegistrationForm() {
 				</div>
 			) : (
 				<form className="login-form" onSubmit={onSubmit}>
+					<div className="justify-center items-center text-[13px] text-red-600">
+						{error}
+					</div>
 					<div>
 						<label htmlFor="firstName">First Name</label>
 						<input type="text" name="firstName" id="firstName" />

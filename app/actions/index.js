@@ -1,5 +1,6 @@
 "use server";
 
+import dbConnection from "@/db/mongoConnection";
 // import { redirect } from "next/navigation"
 import { authUser, createUser, favouriteToggle } from "@/db/queries";
 import bcrypt from "bcrypt";
@@ -15,11 +16,24 @@ export async function registerUser(formData) {
 		password: hashPass,
 		favourites: [],
 	};
-	const created = await createUser(newUser);
 
-	redirect("/login");
+	try {
+		await dbConnection();
 
-	return created;
+		const created = await createUser(newUser);
+
+		if (created) {
+			redirect("/login");
+
+			return created;
+		} else {
+			return {
+				message: "Something went wrong or user already exists",
+			};
+		}
+	} catch (error) {
+		throw error;
+	}
 }
 
 export async function loginUser(formData) {
@@ -27,6 +41,9 @@ export async function loginUser(formData) {
 		const credentials = {};
 		credentials.email = formData.get("email");
 		credentials.password = formData.get("password");
+
+		await dbConnection();
+
 		const found = await authUser(credentials);
 
 		return found;
@@ -41,6 +58,8 @@ export async function favouriteUpdated(userId, recipeId) {
 	}
 
 	try {
+		await dbConnection();
+
 		const res = await favouriteToggle(userId, recipeId);
 
 		return res;

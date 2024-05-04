@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import { dbConnection } from "@/db/mongoConnection";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./providers/AuthProvider";
@@ -18,7 +17,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-	await dbConnection();
 	return (
 		<html lang="en">
 			<body className={poppin.className}>
