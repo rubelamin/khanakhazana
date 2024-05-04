@@ -15,7 +15,7 @@ export default function Favorite({ recipeId }) {
 
 	useEffect(() => {
 		const isFav = auth?.favourites.includes(recipeId);
-		console.log(isFav);
+
 		if (isFav) {
 			setIsFavourite(true);
 		}
