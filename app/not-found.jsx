@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export default async function NotFound() {
-	const headersList = headers();
+	const headersList = await headers();
 	const domain = headersList.get("host");
 	// const data = await getSiteData(domain);
 	return (
