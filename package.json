@@ -12,7 +12,7 @@
     "@plaiceholder/next": "^3.0.0",
     "bcrypt": "^5.1.1",
     "mongoose": "^8.3.2",
-    "next": "15.0.4",
+    "next": "15.0.7",
     "next-share": "^0.27.0",
     "plaiceholder": "^3.0.0",
     "react": "19.0.0",
